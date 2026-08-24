@@ -1,0 +1,36 @@
+:root {
+  /* Every color below is pulled straight from the SEISMIC logo (the two gem tones: #593d49 and #745f68) */
+  --bg: #0e090b;
+  --bg-elevated: #191014;
+  --surface: #21171b;
+  --surface-2: #2d1f25;
+  --border: #3c2a32;
+  --border-bright: #533b46;
+
+  --fracture: #b9839a;
+  --fracture-dim: #5e3b4a;
+  --energy: #d69ab3;
+  --danger: #ff5470;
+  --success: #b9839a;
+  --maroon: #593d49;
+  --mauve: #745f68;
+
+  /* Text */
+  --ink-0: #f4f0f2;
+  --ink-1: #bbb4b7;
+  --ink-2: #91888c;
+  --ink-3: #5d5659;
+
+  /* Type */
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Scale */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-glow: 0 0 40px rgba(185, 131, 154, 0.2);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
