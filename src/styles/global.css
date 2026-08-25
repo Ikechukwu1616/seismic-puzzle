@@ -410,9 +410,12 @@ input[type="range"]::-webkit-slider-thumb {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
 
+/* Plain full-height wrapper. Deliberately NOT a centering flex container:
+   .screen is the scroll container and centers its own content, and flex
+   centering here would fight that on tall pages. */
 .scaled-view {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .link-underline { color: var(--fracture); text-decoration: underline; text-underline-offset: 3px; }
@@ -422,9 +425,12 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* Mobile / phone layout */
 @media (max-width: 600px) {
+  /* NOTE: never put justify-content: center here. Centering a scrolling
+     flex column makes overflow unreachable at the top, which silently
+     breaks the level select grid on phones. Centering is handled by
+     `margin: auto 0` on .content-layer instead. */
   .screen {
     padding: 14px;
-    justify-content: center;
     min-height: 100dvh;
   }
 

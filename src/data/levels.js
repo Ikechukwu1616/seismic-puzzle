@@ -85,7 +85,8 @@ const AUTO_LEVELS = [
   { id: 31, name: 'Tremor Thirty-One', character: 'Ruze', image: '/characters/ruze.jpg' },
   { id: 32, name: 'Tremor Thirty-Two', character: 'Dotman', image: '/characters/dotman.jpg' },
   { id: 33, name: 'Tremor Thirty-Three', character: 'ChainEmpress', image: '/characters/chainempress.jpg' },
-  { id: 34, name: 'Final Epicenter', character: 'Dav Walker', image: '/characters/dav-walker.jpg' },
+  { id: 34, name: 'Tremor Thirty-Four', character: 'Lola', image: '/characters/lola.jpg' },
+  { id: 35, name: 'Final Epicenter', character: 'Dav Walker', image: '/characters/dav-walker.jpg' },
 ];
 
 export const LEVELS = [

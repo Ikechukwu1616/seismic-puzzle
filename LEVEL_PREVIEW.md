@@ -41,4 +41,5 @@ Regenerate any time with: `node scripts/generate-level-preview.cjs`
 | 31 | Ruze | `ruze.jpg` | ![Ruze](public/characters/ruze.jpg) |
 | 32 | Dotman | `dotman.jpg` | ![Dotman](public/characters/dotman.jpg) |
 | 33 | ChainEmpress | `chainempress.jpg` | ![ChainEmpress](public/characters/chainempress.jpg) |
-| 34 | Dav Walker | `dav-walker.jpg` | ![Dav Walker](public/characters/dav-walker.jpg) |
+| 34 | Lola | `lola.jpg` | ![Lola](public/characters/lola.jpg) |
+| 35 | Dav Walker | `dav-walker.jpg` | ![Dav Walker](public/characters/dav-walker.jpg) |
