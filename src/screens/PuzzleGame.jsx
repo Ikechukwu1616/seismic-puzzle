@@ -3,9 +3,8 @@ import ProgressBar from '../components/ProgressBar';
 import PuzzlePiece from '../components/PuzzlePiece';
 import PauseMenu from './PauseMenu';
 import Settings from './Settings';
-import { getLevel, getNextLevelId } from '../data/levels';
+import { getLevel, getNextLevelId, getTimeLimitMs } from '../data/levels';
 
-const TIME_LIMIT_MS = 3 * 60 * 1000;
 
 function initPieces(level) {
   return level.pieces.map((p) => ({
@@ -21,6 +20,7 @@ export default function PuzzleGame({
   gameSettings, onUpdateSettings, onResetProgressRequest, sfx,
 }) {
   const level = useMemo(() => getLevel(levelId), [levelId]);
+  const TIME_LIMIT_MS = useMemo(() => getTimeLimitMs(levelId), [levelId]);
   const [pieces, setPieces] = useState(() => initPieces(level));
   const [draggingId, setDraggingId] = useState(null);
   const [justLocked, setJustLocked] = useState(() => new Set());
@@ -82,7 +82,7 @@ export default function PuzzleGame({
       if (!timedOutRef.current && !finishedRef.current && el >= TIME_LIMIT_MS) {
         // Guard against the puzzle actually being complete already (e.g. the
         // last piece locked the same instant the clock hit zero). If every
-        // piece is locked, this is a win, not a timeout — don't fail it.
+        // piece is locked, this is a win, not a timeout, don't fail it.
         const allLocked = lockedCountRef.current === pieces.length && pieces.length > 0;
         if (allLocked) return;
 
@@ -94,7 +94,7 @@ export default function PuzzleGame({
       }
     }, 250);
     return () => clearInterval(id);
-  }, [paused, finished, level.id, onGameOver, sfx]);
+  }, [paused, finished, level.id, onGameOver, sfx, TIME_LIMIT_MS, pieces.length]);
 
   const togglePause = useCallback(() => {
     setPaused((p) => {

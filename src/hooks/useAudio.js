@@ -9,13 +9,34 @@ export function useAudio(settings) {
     audioManager.applySettings(settings);
   }, [settings.musicOn, settings.sfxOn, settings.musicVolume, settings.sfxVolume]);
 
+  // Browsers block audio until the user actually interacts with the page.
+  // Try immediately (works if the user has already interacted, e.g. after a
+  // reload), then keep listening on every common gesture type until one of
+  // them succeeds. The listeners remove themselves once music is playing.
   useEffect(() => {
-    const start = () => {
+    audioManager.playMusic();
+
+    const events = ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'click'];
+
+    const unlock = () => {
       audioManager.playMusic();
-      window.removeEventListener('pointerdown', start);
+      if (audioManager.isPlaying()) {
+        events.forEach((e) => window.removeEventListener(e, unlock));
+      }
     };
-    window.addEventListener('pointerdown', start, { once: true });
-    return () => window.removeEventListener('pointerdown', start);
+
+    events.forEach((e) => window.addEventListener(e, unlock));
+
+    // Also retry when the tab regains focus or becomes visible again.
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') audioManager.playMusic();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, unlock));
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, []);
 
   return useMemo(() => ({

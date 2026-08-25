@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import AnimatedBackground from '../components/AnimatedBackground';
-import { getLevel } from '../data/levels';
+import { getLevel, getTimeLimitMs } from '../data/levels';
 
-const TIME_LIMIT_MS = 3 * 60 * 1000;
 const AUTO_ADVANCE_MS = 5000;
 
 function fmtTime(ms) {
@@ -12,7 +11,7 @@ function fmtTime(ms) {
 
 export default function CompletionScreen({ levelId, nextLevelId, result, onNext, onReplay, onLevelSelect, sfx }) {
   const level = getLevel(levelId);
-  const timeLeftMs = Math.max(0, TIME_LIMIT_MS - result.timeMs);
+  const timeLeftMs = Math.max(0, getTimeLimitMs(levelId) - result.timeMs);
   const timeLeftLabel = fmtTime(timeLeftMs);
   const [secondsLeft, setSecondsLeft] = useState(Math.ceil(AUTO_ADVANCE_MS / 1000));
   const advancedRef = useRef(false);

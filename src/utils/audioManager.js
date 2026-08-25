@@ -57,6 +57,10 @@ class AudioManager {
     }
   }
 
+  isPlaying() {
+    return !!this.music && !this.music.paused;
+  }
+
   stopMusic() {
     if (this.music) this.music.pause();
   }
